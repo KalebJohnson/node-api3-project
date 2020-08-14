@@ -2,16 +2,19 @@ const express = require("express")
 
 const userRouter = require("./users/userRouter")
 const postsRouter = require("./posts/postRouter")
-const morgan = require("morgan")
+//const morgan = require("morgan")
+const logger = require("./users/logger")
+
 
 const server = express()
 const port = 4000
 
 server.use(express.json())
 
-server.use(morgan("combined"))
+//server.use(morgan("combined"))
+server.use(logger())
 
-//connecting router
+//connecting routers
 server.use("/users" , userRouter)
 server.use("/posts" , postsRouter)
 
