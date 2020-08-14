@@ -25,7 +25,7 @@ router.post('/', validateUser, (req, res) => {
     })
 });
 
-router.post('/:id/posts',  (req, res) => {
+router.post('/:id/posts', validatePost, (req, res) => {
   const body = req.body
   body.user_id = req.params.id
   posts.insert(body)
@@ -115,6 +115,13 @@ function validateUserId(req, res, next) {
       next(error)
     })
 }
+
+// function validateUserID() {
+//  return (req, res, next) => {
+//  users
+//    .getById(req.params.id)......
+// }
+//}
 
 function validateUser(req, res, next) {
   if (Object.keys(req.body).length !== 0) {

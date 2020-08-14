@@ -2,7 +2,7 @@ const express = require('express');
 const posts = require('./postDb');
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   posts
     .get()
     .then((posts) => {
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/:id', validatePostId , (req, res) => {
+router.get('/:id', (req, res, next) => {
   posts
     .getById(req.params.id)
     .then((post) => {
@@ -28,7 +28,7 @@ router.get('/:id', validatePostId , (req, res) => {
     })
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res, next) => {
  posts
   .remove(req.params.id)
   .then((count) => {
@@ -43,7 +43,7 @@ router.delete('/:id', (req, res) => {
   })
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', validatePostId, (req, res, next) => {
   if ( !req.body.text ) {
     return res.status(400).json({message:"Please provide text"})
   }
