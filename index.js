@@ -1,5 +1,5 @@
 const express = require("express")
-
+require('dotenv').config();
 const userRouter = require("./users/userRouter")
 const postsRouter = require("./posts/postRouter")
 const welcomeRouter = require("./welcome/welcomeRouter")
